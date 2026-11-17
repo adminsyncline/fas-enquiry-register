@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAS Private Wealth — Trust Member Enquiry Register</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23922C49'/%3E%3Crect x='7' y='8' width='11' height='4' rx='2' fill='%23F0D5DC'/%3E%3Crect x='7' y='14' width='15' height='4' rx='2' fill='%23fff'/%3E%3Crect x='7' y='20' width='19' height='4' rx='2' fill='%23C48A9C'/%3E%3C/svg%3E">
+<style>
+:root{
+  --burgundy:#922C49; --deep:#6E1F37; --light:#C48A9C; --pale:#F6ECEF; --pale2:#FBF6F7;
+  --grey:#6B6B6B; --ink:#222; --line:#E4DADD; --bg:#F7F5F5; --white:#fff;
+  --ok:#2F6B4F; --okbg:#E6F2EC; --warn:#9A5B00; --warnbg:#FFF2DC;
+  --serif: Georgia, "Times New Roman", Times, serif;
+  --sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--sans)}
+a{color:var(--burgundy)}
+h1,h2,h3{font-family:var(--serif);color:var(--deep);font-weight:normal;margin:0 0 .5em}
+h1{font-size:26px} h2{font-size:21px} h3{font-size:17px}
+.band{height:6px;background:var(--burgundy)}
+header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:24px;padding:10px 20px}
+.logo{display:block;height:46px;width:auto}
+nav.tabs{display:flex;gap:4px;flex:1;flex-wrap:wrap}
+nav.tabs a{padding:8px 14px;border-radius:6px;text-decoration:none;color:var(--grey);font-weight:600}
+nav.tabs a:hover{background:var(--pale2);color:var(--deep)}
+nav.tabs a.active{background:var(--pale);color:var(--burgundy)}
+.who{font-size:13px;color:var(--grey);text-align:right;white-space:nowrap}
+.who b{color:var(--ink)}
+main{max-width:1320px;margin:0 auto;padding:22px 20px 40px}
+footer.ar{max-width:1320px;margin:0 auto;padding:16px 20px 30px;color:var(--grey);font-size:12px;border-top:1px solid var(--line)}
+.demo-banner{background:var(--warnbg);color:var(--warn);text-align:center;padding:6px;font-size:13px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:16px}
+.card h3{border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px}
+.grid{display:grid;gap:12px 16px;grid-template-columns:repeat(12,1fr)}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}
+@media(max-width:820px){.c3,.c4,.c6,.c8{grid-column:span 12}.top-inner{flex-wrap:wrap}}
+label{display:block;font-size:12px;font-weight:600;color:var(--grey);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+label .req{color:var(--burgundy)}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid #CFC4C7;border-radius:6px;font:inherit;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--light);border-color:var(--burgundy)}
+input[readonly]{background:var(--pale2);color:var(--grey)}
+textarea{min-height:90px;resize:vertical}
+.radio-row{display:flex;gap:18px;padding-top:6px}
+.radio-row label{display:flex;align-items:center;gap:6px;text-transform:none;font-size:14px;color:var(--ink);letter-spacing:0;font-weight:normal}
+.radio-row input{width:auto}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--burgundy);background:var(--burgundy);color:#fff;padding:9px 16px;border-radius:6px;font:600 14px var(--sans);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--deep);border-color:var(--deep)}
+.btn.ghost{background:#fff;color:var(--burgundy)}
+.btn.ghost:hover{background:var(--pale)}
+.btn.small{padding:5px 10px;font-size:13px}
+.btn.danger{background:#fff;color:#A33;border-color:#C99}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.spacer{flex:1}
+.muted{color:var(--grey)} .small{font-size:12px}
+.hidden{display:none!important}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+@media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:#fff;border:1px solid var(--line);border-left:5px solid var(--light);border-radius:10px;padding:12px 16px;cursor:pointer}
+.stat.on{outline:2px solid var(--burgundy)}
+.stat .n{font:28px var(--serif);color:var(--deep)}
+.stat .l{color:var(--grey);font-size:12px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.stat.s-sub{border-left-color:var(--light)}.stat.s-esc{border-left-color:var(--burgundy)}.stat.s-clo{border-left-color:var(--grey)}.stat.s-all{border-left-color:var(--deep)}
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:12px}
+@media(max-width:820px){.filters{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;background:#fff}
+th{background:var(--deep);color:#fff;text-align:left;font-weight:600;padding:9px 10px;font-size:12px;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover{background:var(--pale2)}
+.tablewrap{border:1px solid var(--line);border-radius:10px;overflow:auto}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap}
+.b-Submitted{background:var(--pale);color:var(--deep)}
+.b-Escalated{background:var(--burgundy);color:#fff}
+.b-Closed{background:#E8E8E8;color:#555}
+.b-draft{background:var(--warnbg);color:var(--warn)}
+.b-ok{background:var(--okbg);color:var(--ok)}
+.mono{font-variant-numeric:tabular-nums;white-space:nowrap}
+.timer-pill{display:inline-flex;align-items:center;gap:8px;background:var(--pale);color:var(--deep);border-radius:30px;padding:6px 14px;font-weight:700}
+.timer-pill .dot{width:9px;height:9px;border-radius:50%;background:var(--burgundy);animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.formhead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(40,10,20,.45);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:30px 12px;overflow:auto}
+.modal{background:#fff;border-radius:12px;width:min(1040px,100%);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal.narrow{width:min(560px,100%)}
+.modal-h{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);background:var(--pale2);border-radius:12px 12px 0 0}
+.modal-h h2{margin:0}
+.modal-b{padding:18px 20px}
+.x{margin-left:auto;background:none;border:none;font-size:26px;line-height:1;color:var(--grey);cursor:pointer}
+.two{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+@media(max-width:900px){.two{grid-template-columns:1fr}}
+dl.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin:0}
+dl.kv dt{color:var(--grey);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+dl.kv dd{margin:0;word-break:break-word}
+.notes{white-space:pre-wrap;background:var(--pale2);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.timeline{list-style:none;padding:0;margin:0}
+.timeline li{border-left:3px solid var(--light);padding:4px 0 10px 12px;margin-left:4px}
+.timeline li.k-status,.timeline li.k-escalated{border-left-color:var(--burgundy)}
+.timeline li.k-time{border-left-color:var(--grey)}
+.timeline .meta{font-size:12px;color:var(--grey)}
+.timeline .txt{white-space:pre-wrap}
+.timebox{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.timebox>div{background:var(--pale2);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.timebox .v{font:20px var(--serif);color:var(--deep)}
+.timebox .l{font-size:11px;color:var(--grey);text-transform:uppercase;font-weight:600;letter-spacing:.04em}
+.section{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+.section h3{font-size:16px;margin-bottom:10px}
+/* FAQ */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:#fff;z-index:60;box-shadow:-10px 0 40px rgba(0,0,0,.2);display:flex;flex-direction:column}
+.drawer .modal-h{border-radius:0}
+.drawer .body{padding:14px 18px;overflow:auto;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{border:1px solid var(--light);background:#fff;color:var(--deep);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:13px}
+.chip.on{background:var(--burgundy);color:#fff;border-color:var(--burgundy)}
+.faq{border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:#fff}
+.faq summary{padding:10px 12px;cursor:pointer;font-weight:600;color:var(--deep);list-style:none;display:flex;gap:8px;align-items:flex-start}
+.faq summary::before{content:"+";color:var(--burgundy);font-weight:700;width:12px}
+.faq[open] summary::before{content:"–"}
+.faq .ans{padding:0 14px 12px 32px;white-space:pre-wrap}
+.faq .cat{font-size:11px;color:var(--grey);font-weight:600;text-transform:uppercase}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--deep);color:#fff;padding:10px 18px;border-radius:8px;z-index:90;box-shadow:0 8px 30px rgba(0,0,0,.25);max-width:90%}
+.toast.err{background:#A33}
+.login{max-width:440px;margin:60px auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px}
+.login .logo{height:64px;margin:0 auto 18px}
+.err-msg{color:#A33;font-size:13px;margin-top:8px}
+.tot td{font-weight:700;background:var(--pale2)}
+.print-head{display:none}
+@media print{
+  header.top,.band,.demo-banner,nav,.no-print,footer.ar .no-print{display:none!important}
+  body,main{background:#fff;padding:0}
+  .print-head{display:block;margin-bottom:12px}
+  .card{border:none;padding:0}
+  th{background:#eee!important;color:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .view:not(.printing){display:none!important}
+}
+</style>
+</head>
+<body>
+<div class="band"></div>
+<div id="demoBanner" class="demo-banner hidden">Demo mode — data is saved in this browser only. Connect Supabase in the CONFIG section to share the register between users.</div>
+
+<!-- Logo template (redrawn from the FAS draft artwork) -->
+<template id="logoTpl">
+<svg class="logo" viewBox="0 0 330 70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FAS Private Wealth">
+  <rect x="0" y="12" width="34" height="9" rx="3" fill="#C48A9C"/>
+  <rect x="0" y="28" width="48" height="9" rx="3" fill="#922C49"/>
+  <rect x="0" y="44" width="62" height="9" rx="3" fill="#6E1F37"/>
+  <text x="84" y="44" font-family="Georgia, 'Times New Roman', Times, serif" font-size="44" fill="#922C49">FAS</text>
+  <text x="86" y="64" font-family="Helvetica, Arial, sans-serif" font-size="11.5" letter-spacing="4.2" fill="#6B6B6B">PRIVATE WEALTH</text>
+</svg>
+</template>
+
+<div id="app"></div>
+
+<script>
+/* =====================================================================
+   CONFIG — fill these in to connect to Supabase (see README).
+   Leave SUPABASE_URL blank to run in demo mode.
+   ===================================================================== */
+const CONFIG = {
+  SUPABASE_URL: 'https://exqpytmywtqfkypypafj.supabase.co',          // e.g. 'https://abcdefgh.supabase.co'
+  SUPABASE_ANON_KEY: 'sb_publishable_uxUp8_hBJZgNWPirc3MEuQ_Q34cxmy3',       // Project Settings → API → anon public key
+  EMAIL_FUNCTION: 'send-escalation',
+  APP_URL: ''                  // e.g. 'https://adminsyncline.github.io/fas-enquiry-register/' (used in email links)
+};
+const DEMO = !CONFIG.SUPABASE_URL;
+
+const STATUSES = ['Submitted','Escalated','Closed'];
+const TYPES = ['1. Centrelink','2. Investment / Term Deposit','3. Superannuation','4. Loans, Finance, Hire Purchase','5. Wills & Estates','6. Other'];
+const FAQ_SEED = [{"category": "1. Centrelink", "question": "Do I need to tell Centrelink about a payment from my trust?", "answer": "Generally yes. People receiving a Centrelink payment must report changes to their income and assets, usually within 14 days. Depending on how it is paid and what it is used for, a trust payment may count under the income test, the assets test, or both.\n\nOn the call: suggest the enquirer reports the payment to Centrelink (online via myGov / Centrelink app, or by phone) and keeps the trust's payment letter. If they are unsure how it will affect their payment, escalate to an adviser.", "link": "https://www.servicesaustralia.gov.au/changes-to-your-income-and-assets"}, {"category": "1. Centrelink", "question": "If I give some of my trust money to family, will it affect my pension?", "answer": "It can. Centrelink has gifting rules: gifts above $10,000 in a financial year, or $30,000 over five financial years, may still be counted as your asset for five years (called a 'deprived asset').\n\nOn the call: give this as general information only and offer an appointment with an adviser before any large gift is made.", "link": "https://www.servicesaustralia.gov.au/gifting"}, {"category": "2. Investment / Term Deposit", "question": "What is a term deposit?", "answer": "A term deposit holds money with a bank for a fixed period (e.g. 3, 6 or 12 months) at a fixed interest rate. Withdrawing early usually means giving notice (often 31 days) and may reduce the interest paid.\n\nDeposits with Australian banks, building societies and credit unions (ADIs) are covered by the Government's Financial Claims Scheme up to $250,000 per account holder per institution.", "link": "https://www.moneysmart.gov.au/banking/term-deposits"}, {"category": "2. Investment / Term Deposit", "question": "Can you tell me where to invest my trust money over the phone?", "answer": "No. Recommending a specific investment is personal financial advice. That needs an appointment with a FAS adviser, who will look at the person's whole situation and provide a written Statement of Advice (SOA).\n\nOn the call: take their details, explain the next step and escalate to an adviser to book an appointment.", "link": ""}, {"category": "3. Superannuation", "question": "How do I find my super or lost super?", "answer": "Super accounts, including lost and unclaimed super, can be found through the ATO via myGov (link the ATO to myGov, then go to Super). The person can also call the ATO on 13 10 20.\n\nOn the call: if they want help consolidating accounts or choosing a fund, escalate to an adviser.", "link": "https://www.ato.gov.au/individuals-and-families/super-for-individuals-and-families/super/growing-and-keeping-track-of-your-super/keeping-track-of-your-super/find-lost-and-unclaimed-super"}, {"category": "3. Superannuation", "question": "Can I put my trust payment into super?", "answer": "Usually yes, but there are yearly contribution caps and age-based rules, and money in super generally cannot be accessed until retirement age. Going over a cap can mean extra tax.\n\nOn the call: general information only. Escalate to an adviser to check the current caps and whether it suits the person.", "link": "https://www.ato.gov.au/individuals-and-families/super-for-individuals-and-families/super/growing-and-keeping-track-of-your-super/caps-limits-and-tax-on-super-contributions"}, {"category": "4. Loans, Finance, Hire Purchase", "question": "Should I use my trust money to pay off a loan or car finance?", "answer": "Paying off high-interest debt (credit cards, payday loans, some car finance) is often worth considering, but early payout fees and the person's other needs matter.\n\nOn the call: ask them to get a payout figure from the lender in writing. If they are struggling with debts, the free National Debt Helpline is 1800 007 007. Escalate if they want personal advice.", "link": "https://ndh.org.au/"}, {"category": "4. Loans, Finance, Hire Purchase", "question": "Someone is asking me for money or my bank details. What should I do?", "answer": "Never give out bank details, passwords or one-time codes to anyone who contacts you unexpectedly, even if they say they are from a bank, the trust or the government. Hang up and call the organisation back on a number you find yourself.\n\nScams can be reported at Scamwatch. If money has already been sent, the person should call their bank straight away.", "link": "https://www.scamwatch.gov.au/"}, {"category": "5. Wills & Estates", "question": "Do I need a will?", "answer": "A will sets out who receives your money and belongings when you pass away. In WA, if there is no valid will, the law decides who inherits (intestacy), which may not match the person's or their family's wishes.\n\nOn the call: wills can be prepared by a lawyer or the Public Trustee WA. Escalate if they want help with estate planning.", "link": "https://www.wa.gov.au/organisation/public-trustee"}, {"category": "5. Wills & Estates", "question": "What happens to my trust entitlements when I pass away?", "answer": "It depends on the trust deed and the rules of the trust paying the money. Some entitlements pass to nominated family, others do not.\n\nOn the call: suggest the person contacts the trust directly to ask, and records any nomination in writing.", "link": ""}, {"category": "6. Other", "question": "What does FAS Private Wealth do, and is there a cost?", "answer": "[FAS TO COMPLETE — services offered to trust members, any fees and who pays them, and how to book an appointment.]", "link": ""}];
+
+/* ---------------- utilities ---------------- */
+const $ = (s,el=document)=>el.querySelector(s);
+const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
+const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get(k,ss){try{return JSON.parse((ss?sessionStorage:localStorage).getItem(k))}catch(e){return null}},
+  set(k,v,ss){try{(ss?sessionStorage:localStorage).setItem(k,JSON.stringify(v))}catch(e){}},
+  del(k,ss){try{(ss?sessionStorage:localStorage).removeItem(k)}catch(e){}}
+};
+const mem = {}; // fallback when storage is unavailable
+function hms(sec){sec=Math.max(0,Math.round(sec||0));const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(s).padStart(2,'0')}
+function hmm(sec){sec=Math.max(0,Math.round(sec||0));const h=Math.floor(sec/3600),m=Math.round(sec%3600/60);return h+'h '+String(m).padStart(2,'0')+'m'}
+function todayISO(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function fmtDate(iso){if(!iso)return '';const [y,m,d]=String(iso).slice(0,10).split('-');return d+'/'+m+'/'+y}
+function fmtDT(iso){if(!iso)return '';const d=new Date(iso);return d.toLocaleDateString('en-AU')+' '+d.toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'})}
+function toast(msg,err){const t=document.createElement('div');t.className='toast'+(err?' err':'');t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),err?6000:3500)}
+function logoHTML(){return $('#logoTpl').innerHTML}
+
+/* =====================================================================
+   DATA LAYER — same interface for demo (browser) and Supabase
+   ===================================================================== */
+const Auth = {
+  session:null,
+  load(){this.session=store.get('fas_session',true)},
+  save(s){this.session=s;store.set('fas_session',s,true)},
+  clear(){this.session=null;store.del('fas_session',true)},
+  async login(email,password){
+    const r=await fetch(CONFIG.SUPABASE_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:CONFIG.SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(j.error_description||j.msg||'Login failed');
+    this.save({access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+j.expires_in*1000,email:j.user.email});
+  },
+  async refresh(){
+    const r=await fetch(CONFIG.SUPABASE_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:CONFIG.SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:this.session.refresh_token})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok){this.clear();throw new Error('Session expired — please sign in again')}
+    this.save({access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+j.expires_in*1000,email:j.user.email});
+  },
+  async token(){if(!this.session)throw new Error('Not signed in');if(Date.now()>this.session.expires_at-60000)await this.refresh();return this.session.access_token},
+  async recover(email){await fetch(CONFIG.SUPABASE_URL+'/auth/v1/recover',{method:'POST',headers:{apikey:CONFIG.SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,redirect_to:CONFIG.APP_URL||location.href.split('#')[0]})})},
+  async setPassword(token,password){
+    const r=await fetch(CONFIG.SUPABASE_URL+'/auth/v1/user',{method:'PUT',headers:{apikey:CONFIG.SUPABASE_ANON_KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({password})});
+    if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error(j.msg||'Could not set password')}
+  }
+};
+
+const SB = {
+  async req(method,path,body,extra={}){
+    const tok=await Auth.token();
+    const r=await fetch(CONFIG.SUPABASE_URL+'/rest/v1/'+path,{method,headers:{apikey:CONFIG.SUPABASE_ANON_KEY,Authorization:'Bearer '+tok,'Content-Type':'application/json',Prefer:'return=representation',...extra},body:body?JSON.stringify(body):undefined});
+    if(r.status===204) return null;
+    const txt=await r.text();
+    const j=txt?JSON.parse(txt):null;
+    if(!r.ok) throw new Error((j&&(j.message||j.hint))||('Database error '+r.status));
+    return j;
+  },
+  select(t,q=''){return this.req('GET',t+'?select=*'+q)},
+  async insert(t,row){return (await this.req('POST',t,row))[0]},
+  async update(t,id,patch){return (await this.req('PATCH',t+'?id=eq.'+id,patch))[0]},
+  remove(t,id){return this.req('DELETE',t+'?id=eq.'+id)}
+};
+
+const Demo = {
+  key:'fas_enquiry_demo_v5', d:null,
+  load(){this.d=store.get(this.key)||mem[this.key]||this.seed();this.save()},
+  save(){store.set(this.key,this.d);mem[this.key]=this.d},
+  clone(x){return JSON.parse(JSON.stringify(x))},
+  async select(t){return this.clone(this.d[t])},
+  async insert(t,row){
+    const id=++this.d.seq[t];row={id,...row};
+    if(t==='fas_enquiries'){row.enquiry_no='FAS-'+String(id).padStart(5,'0');row.created_at=row.created_at||new Date().toISOString()}
+    if(t==='fas_events'){row.created_at=row.created_at||new Date().toISOString()}
+    this.d[t].push(row);this.save();return this.clone(row);
+  },
+  async update(t,id,patch){const r=this.d[t].find(x=>x.id===id);Object.assign(r,patch);this.save();return this.clone(r)},
+  async remove(t,id){this.d[t]=this.d[t].filter(x=>x.id!==id);this.save();return null},
+  seed(){
+    const d={seq:{fas_users:0,fas_trusts:0,fas_faqs:0,fas_enquiries:0,fas_events:0},fas_users:[],fas_trusts:[],fas_faqs:[],fas_enquiries:[],fas_events:[]};
+    const add=(t,r)=>{r.id=++d.seq[t];d[t].push(r);return r};
+    [['Demo Admin','admin@example.com',true,true],['Lisa Boyd','lisa@wealthmerchants.com.au',false,false],['Jenna Butson','info@wealthmerchants.com.au',false,false],['Dana Garth','dana@wealthmerchants.com.au',false,false],['Chelsea Mourtoulakis','chelsea@wealthmerchants.com.au',false,false],['Kylie Turner','planning@wealthmerchants.com.au',false,true],['Allan Butson','allan@wealthmerchants.com.au',false,true]]
+      .forEach(([name,email,a,e])=>add('fas_users',{name,email,is_admin:a,is_escalation:e,active:true}));
+    ['Wangkatja Tjungula','Darlot','Nangaanya-ku'].forEach(n=>add('fas_trusts',{name:n,active:true}));
+    FAQ_SEED.forEach(f=>add('fas_faqs',{...f,approved:false,updated_by:'Setup',updated_at:new Date().toISOString()}));
+    const day=n=>{const x=new Date();x.setDate(x.getDate()-n);return x};
+    const iso=x=>x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0');
+    const samples=[
+      [6,'Sample Member One','Wangkatja Tjungula','1. Centrelink','Asking whether the upcoming trust distribution needs to be reported to Centrelink. Explained reporting obligation using FAQ.','Lisa Boyd',false,'',  'Closed',420],
+      [4,'Sample Member Two','Darlot','2. Investment / Term Deposit','Wants to put part of distribution into a term deposit and asked which bank. Personal advice needed — escalated for appointment.','Jenna Butson',true,'Allan Butson','Escalated',610],
+      [2,'Sample Member Three','Wangkatja Tjungula','5. Wills & Estates','Asked about making a will and what happens to trust entitlements for children.','Lisa Boyd',false,'','Submitted',305],
+    ];
+    samples.forEach(([ago,name,trust,type,notes,by,escR,escTo,status,secs],i)=>{
+      const created=day(ago);created.setHours(10+i,15,0,0);
+      const e=add('fas_enquiries',{enquiry_date:iso(created),created_at:created.toISOString(),enquirer_name:name,address:'1 Sample Street, Geraldton WA 6530',phone:'0400 000 00'+i,email:'',dob:'',trust,taken_by:by,enquiry_type:type,other_desc:'',notes,escalation_required:escR,escalated_to:escTo,status,call_seconds:secs,faq_used:''});
+      e.enquiry_no='FAS-'+String(e.id).padStart(5,'0');
+      add('fas_events',{enquiry_id:e.id,kind:'created',by_name:by,text:'Enquiry submitted'+(escR?' and escalated to '+escTo:''),seconds:0,created_at:created.toISOString()});
+      if(escR){const t=new Date(created);t.setHours(t.getHours()+3);add('fas_events',{enquiry_id:e.id,kind:'time',by_name:escTo,text:'Reviewed file and called member back to book appointment',seconds:1500,created_at:t.toISOString()})}
+      if(status==='Closed'){const t=new Date(created);t.setHours(t.getHours()+1);add('fas_events',{enquiry_id:e.id,kind:'status',by_name:'Demo Admin',text:'Status changed Submitted → Closed\nAnswered on the call — no further action.',seconds:0,created_at:t.toISOString()})}
+    });
+    return d;
+  }
+};
+const DB = DEMO ? Demo : SB;
+
+async function sendEscalationEmail(enq,toName,byName){
+  const u=S.users.find(x=>x.name===toName);
+  if(!u||!u.email){toast('No email address recorded for '+toName+' — email not sent',true);return}
+  if(DEMO){toast('Demo: escalation email would be sent to '+toName+' ('+u.email+')');return}
+  try{
+    const tok=await Auth.token();
+    const r=await fetch(CONFIG.SUPABASE_URL+'/functions/v1/'+CONFIG.EMAIL_FUNCTION,{method:'POST',headers:{apikey:CONFIG.SUPABASE_ANON_KEY,Authorization:'Bearer '+tok,'Content-Type':'application/json'},
+      body:JSON.stringify({to_email:u.email,to_name:u.name,escalated_by:byName,app_url:(CONFIG.APP_URL||location.href.split('#')[0])+'#enq='+enq.enquiry_no,enquiry:enq})});
+    if(!r.ok) throw new Error(await r.text());
+    toast('Escalation email sent to '+toName);
+  }catch(e){toast('Enquiry saved, but the email failed: '+e.message,true)}
+}
+
+/* =====================================================================
+   STATE
+   ===================================================================== */
+const S = {me:null,users:[],trusts:[],faqs:[],enquiries:[],events:[],
+  view:'register',filter:{q:'',status:'',trust:'',type:'',mine:false},
+  form:null, formTimer:null, escTimers:{}, openId:null};
+function loadTimers(){S.escTimers=store.get('fas_esc_timers')||{}}
+function saveTimers(){store.set('fas_esc_timers',S.escTimers)}
+
+async function loadAll(){
+  const [users,trusts,faqs,enqs,events]=await Promise.all([
+    DB.select('fas_users'),DB.select('fas_trusts'),DB.select('fas_faqs'),DB.select('fas_enquiries'),DB.select('fas_events')]);
+  S.users=users.sort((a,b)=>a.name.localeCompare(b.name));
+  S.trusts=trusts.sort((a,b)=>a.name.localeCompare(b.name));
+  S.faqs=faqs.sort((a,b)=>(a.category+a.question).localeCompare(b.category+b.question));
+  S.enquiries=enqs.sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
+  S.events=events.sort((a,b)=>String(a.created_at).localeCompare(String(b.created_at)));
+}
+const escSeconds = id => S.events.filter(e=>e.enquiry_id===id&&e.kind==='time').reduce((s,e)=>s+(+e.seconds||0),0);
+const totalSeconds = e => (+e.call_seconds||0)+escSeconds(e.id);
+const isAdmin = ()=>!!(S.me&&S.me.is_admin);
+const canEditFaq = ()=>!!(S.me&&(S.me.is_admin||S.me.is_escalation));
+async function addEvent(enquiry_id,kind,text,seconds=0){
+  const ev=await DB.insert('fas_events',{enquiry_id,kind,by_name:S.me.name,text,seconds});
+  S.events.push(ev);return ev;
+}
+
+/* =====================================================================
+   SHELL / ROUTING
+   ===================================================================== */
+const VIEWS=[['register','Register'],['new','New Enquiry'],['faqs','FAQs'],['report','Billing Report'],['settings','Settings']];
+function renderShell(){
+  $('#app').innerHTML=`
+  <header class="top"><div class="top-inner">
+    ${logoHTML()}
+    <nav class="tabs">${VIEWS.filter(v=>v[0]!=='settings'||isAdmin()).map(([k,l])=>`<a href="#${k}" data-v="${k}">${l}</a>`).join('')}</nav>
+    <div class="who">Signed in as <b>${esc(S.me.name)}</b>${S.me.is_admin?' · Admin':''}${S.me.is_escalation?' · Adviser':''}<br>${DEMO?'':'<a href="#" id="chpw">Change password</a> · '}<a href="#" id="signout">Sign out</a></div>
+  </div></header>
+  <main>
+    <section class="view" id="v-register"></section>
+    <section class="view" id="v-new"></section>
+    <section class="view" id="v-faqs"></section>
+    <section class="view" id="v-report"></section>
+    <section class="view" id="v-settings"></section>
+  </main>
+  <footer class="ar">FAS Private Wealth Pty Ltd — Corporate Authorised Representative No. 001322716 of Wealth Merchants Australia Pty Ltd, AFSL 321924.<span class="no-print"> · Information in this register is confidential and must be handled in line with FAS privacy obligations.</span></footer>`;
+  if($('#chpw'))$('#chpw').onclick=e=>{e.preventDefault();changePassword()};
+  $('#signout').onclick=e=>{e.preventDefault();Auth.clear();store.del('fas_demo_user',true);location.hash='';location.reload()};
+}
+function route(){
+  const h=location.hash.slice(1);
+  if(h.startsWith('enq=')){const no=decodeURIComponent(h.slice(4));const e=S.enquiries.find(x=>x.enquiry_no===no);show('register');if(e)openEnquiry(e.id);else toast('Enquiry '+no+' not found',true);return}
+  show(VIEWS.some(v=>v[0]===h)?h:'register');
+}
+function show(v){
+  if(v==='settings'&&!isAdmin())v='register';
+  S.view=v;
+  $$('nav.tabs a').forEach(a=>a.classList.toggle('active',a.dataset.v===v));
+  $$('.view').forEach(s=>s.classList.toggle('hidden',s.id!=='v-'+v));
+  ({register:renderRegister,new:renderNew,faqs:renderFaqs,report:renderReport,settings:renderSettings})[v]();
+}
+window.addEventListener('hashchange',()=>{if(S.me)route()});
+
+/* =====================================================================
+   REGISTER
+   ===================================================================== */
+function renderRegister(){
+  const f=S.filter, el=$('#v-register');
+  const counts={Submitted:0,Escalated:0,Closed:0};S.enquiries.forEach(e=>counts[e.status]=(counts[e.status]||0)+1);
+  el.innerHTML=`
+  <div class="row" style="margin-bottom:14px"><h1 style="margin:0">Enquiry Register</h1><span class="spacer"></span>
+    <button class="btn ghost" id="refresh">↻ Refresh</button><a class="btn" href="#new">+ New Enquiry</a></div>
+  <div class="stats">
+    <div class="stat s-all ${!f.status?'on':''}" data-s=""><div class="n">${S.enquiries.length}</div><div class="l">All enquiries</div></div>
+    <div class="stat s-sub ${f.status==='Submitted'?'on':''}" data-s="Submitted"><div class="n">${counts.Submitted}</div><div class="l">Submitted</div></div>
+    <div class="stat s-esc ${f.status==='Escalated'?'on':''}" data-s="Escalated"><div class="n">${counts.Escalated}</div><div class="l">Escalated</div></div>
+    <div class="stat s-clo ${f.status==='Closed'?'on':''}" data-s="Closed"><div class="n">${counts.Closed}</div><div class="l">Closed</div></div>
+  </div>
+  <div class="filters">
+    <div><label>Search</label><input id="f-q" placeholder="Name, enquiry no., notes…" value="${esc(f.q)}"></div>
+    <div><label>Status</label><select id="f-status"><option value="">All</option>${STATUSES.map(s=>`<option ${f.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+    <div><label>Trust</label><select id="f-trust"><option value="">All</option>${S.trusts.map(t=>`<option ${f.trust===t.name?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
+    <div><label>Type</label><select id="f-type"><option value="">All</option>${TYPES.map(t=>`<option ${f.type===t?'selected':''}>${t}</option>`).join('')}</select></div>
+    <div><label class="row" style="text-transform:none;font-size:13px;color:var(--ink);gap:6px;padding-bottom:9px"><input type="checkbox" id="f-mine" style="width:auto" ${f.mine?'checked':''}> Escalated to me</label></div>
+  </div>
+  <div class="tablewrap"><table><thead><tr><th>Enquiry No.</th><th>Date</th><th>Enquirer</th><th>Trust</th><th>Type</th><th>Taken by</th><th>Escalated to</th><th>Status</th><th>Total time</th></tr></thead><tbody id="regBody"></tbody></table></div>`;
+  $$('.stat',el).forEach(s=>s.onclick=()=>{f.status=s.dataset.s;renderRegister()});
+  $('#f-q').oninput=e=>{f.q=e.target.value;fillRegister()};
+  $('#f-status').onchange=e=>{f.status=e.target.value;renderRegister()};
+  $('#f-trust').onchange=e=>{f.trust=e.target.value;fillRegister()};
+  $('#f-type').onchange=e=>{f.type=e.target.value;fillRegister()};
+  $('#f-mine').onchange=e=>{f.mine=e.target.checked;fillRegister()};
+  $('#refresh').onclick=async()=>{await safe(loadAll);renderRegister();toast('Register refreshed')};
+  fillRegister();
+}
+function fillRegister(){
+  const f=S.filter,q=f.q.trim().toLowerCase();
+  const rows=S.enquiries.filter(e=>(!f.status||e.status===f.status)&&(!f.trust||e.trust===f.trust)&&(!f.type||e.enquiry_type===f.type)&&(!f.mine||e.escalated_to===S.me.name)
+    &&(!q||[e.enquiry_no,e.enquirer_name,e.notes,e.phone,e.email,e.taken_by,e.escalated_to,e.other_desc].join(' ').toLowerCase().includes(q)));
+  $('#regBody').innerHTML=rows.length?rows.map(e=>`<tr class="click" data-id="${e.id}">
+    <td><b>${esc(e.enquiry_no)}</b></td><td>${fmtDate(e.enquiry_date)}</td><td>${esc(e.enquirer_name)}</td><td>${esc(e.trust)}</td>
+    <td>${esc(e.enquiry_type)}${e.enquiry_type==='6. Other'&&e.other_desc?`<div class="small muted">${esc(e.other_desc)}</div>`:''}</td>
+    <td>${esc(e.taken_by)}</td><td>${esc(e.escalated_to||'—')}</td><td><span class="badge b-${e.status}">${e.status}</span>${S.escTimers[e.id]?' <span title="Timer running">⏱</span>':''}</td>
+    <td class="mono">${hmm(totalSeconds(e))}</td></tr>`).join('')
+    :`<tr><td colspan="9" class="muted" style="text-align:center;padding:30px">No enquiries match these filters.</td></tr>`;
+  $$('#regBody tr.click').forEach(tr=>tr.onclick=()=>openEnquiry(+tr.dataset.id));
+}
+
+/* =====================================================================
+   NEW ENQUIRY FORM
+   ===================================================================== */
+function blankForm(){return {startedAt:Date.now(),enquirer_name:'',address:'',phone:'',email:'',dob:'',trust:'',enquiry_type:'',other_desc:'',notes:'',escalation_required:'N',escalated_to:'',faq_used:[]}}
+function renderNew(){
+  if(!S.form) S.form=blankForm();
+  const F=S.form, el=$('#v-new'), escalators=S.users.filter(u=>u.active&&u.is_escalation);
+  el.innerHTML=`
+  <div class="formhead"><h1 style="margin:0">New Trust Member Enquiry</h1>
+    <span class="timer-pill" title="Counts from when the form was opened until it is submitted"><span class="dot"></span>Call time <span id="callTime" class="mono">0:00</span></span>
+    <span class="spacer"></span>
+    <button class="btn ghost" id="openFaq" type="button">? Open FAQs</button>
+    <button class="btn ghost" id="clearForm" type="button">Clear form</button></div>
+  <form id="enqForm" autocomplete="off">
+  <div class="card"><h3>Personal details of enquirer</h3><div class="grid">
+    <div class="c6"><label>Name <span class="req">*</span></label><input name="enquirer_name" value="${esc(F.enquirer_name)}"></div>
+    <div class="c3"><label>Phone</label><input name="phone" value="${esc(F.phone)}" inputmode="tel"></div>
+    <div class="c3"><label>Date of birth</label><input name="dob" type="date" value="${esc(F.dob)}"></div>
+    <div class="c6"><label>Address</label><input name="address" value="${esc(F.address)}"></div>
+    <div class="c6"><label>Email</label><input name="email" type="email" value="${esc(F.email)}"></div>
+  </div></div>
+  <div class="card"><h3>Enquiry</h3><div class="grid">
+    <div class="c4"><label>Aboriginal trust <span class="req">*</span></label><select name="trust"><option value="">— Select trust —</option>${S.trusts.filter(t=>t.active).map(t=>`<option ${F.trust===t.name?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
+    <div class="c4"><label>Type of enquiry <span class="req">*</span></label><select name="enquiry_type"><option value="">— Select type —</option>${TYPES.map(t=>`<option ${F.enquiry_type===t?'selected':''}>${t}</option>`).join('')}</select></div>
+    <div class="c4"><label>Person taking call</label><input value="${esc(S.me.name)}" readonly></div>
+    <div class="c12 ${F.enquiry_type==='6. Other'?'':'hidden'}" id="otherWrap"><label>Other — describe the gist of the enquiry <span class="req">*</span></label><input name="other_desc" value="${esc(F.other_desc)}"></div>
+    <div class="c12"><label>Summary call notes <span class="req">*</span></label><textarea name="notes" rows="6">${esc(F.notes)}</textarea>
+      <div class="small muted" id="faqUsed">${F.faq_used.length?'FAQs referred to: '+F.faq_used.map(esc).join('; '):''}</div></div>
+  </div></div>
+  <div class="card"><h3>Escalation</h3><div class="grid">
+    <div class="c4"><label>Escalation required?</label><div class="radio-row">
+      <label><input type="radio" name="escalation_required" value="N" ${F.escalation_required==='N'?'checked':''}> No</label>
+      <label><input type="radio" name="escalation_required" value="Y" ${F.escalation_required==='Y'?'checked':''}> Yes</label></div></div>
+    <div class="c8 ${F.escalation_required==='Y'?'':'hidden'}" id="escWrap"><label>Escalate to <span class="req">*</span></label>
+      <select name="escalated_to"><option value="">— Select person —</option>${escalators.map(u=>`<option ${F.escalated_to===u.name?'selected':''}>${esc(u.name)}</option>`).join('')}</select>
+      <div class="small muted" style="margin-top:4px">The selected person is emailed the enquiry details when you submit.</div></div>
+  </div></div>
+  <div class="row"><span class="spacer"></span><span class="err-msg" id="formErr"></span><button class="btn" type="submit" id="submitBtn">Submit enquiry</button></div>
+  </form>`;
+  const form=$('#enqForm');
+  form.addEventListener('input',e=>{const n=e.target.name;if(!n)return;F[n]=e.target.value;
+    if(n==='enquiry_type')$('#otherWrap').classList.toggle('hidden',F.enquiry_type!=='6. Other');
+    if(n==='escalation_required')$('#escWrap').classList.toggle('hidden',F.escalation_required!=='Y');});
+  form.onchange=e=>{const n=e.target.name;if(!n)return;F[n]=e.target.value;$('#otherWrap').classList.toggle('hidden',F.enquiry_type!=='6. Other');$('#escWrap').classList.toggle('hidden',F.escalation_required!=='Y')};
+  form.onsubmit=submitEnquiry;
+  $('#openFaq').onclick=()=>openFaqDrawer(F.enquiry_type);
+  $('#clearForm').onclick=()=>{S.form=blankForm();renderNew()};
+  tickForm();
+  clearInterval(S.formTimer);S.formTimer=setInterval(tickForm,1000);
+}
+function tickForm(){const t=$('#callTime');if(t&&S.form)t.textContent=hms((Date.now()-S.form.startedAt)/1000)}
+async function submitEnquiry(ev){
+  ev.preventDefault();
+  const F=S.form, err=[];
+  if(!F.enquirer_name.trim())err.push('name');
+  if(!F.trust)err.push('trust');
+  if(!F.enquiry_type)err.push('type of enquiry');
+  if(F.enquiry_type==='6. Other'&&!F.other_desc.trim())err.push('description for "Other"');
+  if(!F.notes.trim())err.push('call notes');
+  if(F.escalation_required==='Y'&&!F.escalated_to)err.push('person to escalate to');
+  if(err.length){$('#formErr').textContent='Please complete: '+err.join(', ');return}
+  $('#formErr').textContent='';$('#submitBtn').disabled=true;
+  const secs=Math.round((Date.now()-F.startedAt)/1000);
+  const esc_=F.escalation_required==='Y';
+  const row={enquiry_date:todayISO(),enquirer_name:F.enquirer_name.trim(),address:F.address.trim(),phone:F.phone.trim(),email:F.email.trim(),dob:F.dob||null,
+    trust:F.trust,taken_by:S.me.name,enquiry_type:F.enquiry_type,other_desc:F.enquiry_type==='6. Other'?F.other_desc.trim():'',notes:F.notes.trim(),
+    escalation_required:esc_,escalated_to:esc_?F.escalated_to:'',status:esc_?'Escalated':'Submitted',call_seconds:secs,faq_used:F.faq_used.join('; ')};
+  try{
+    const saved=await DB.insert('fas_enquiries',row);
+    S.enquiries.unshift(saved);
+    await addEvent(saved.id,'created','Enquiry submitted (call time '+hms(secs)+')'+(esc_?' and escalated to '+F.escalated_to:''));
+    toast('Enquiry '+saved.enquiry_no+' submitted');
+    if(esc_) await sendEscalationEmail(saved,F.escalated_to,S.me.name);
+    S.form=null;clearInterval(S.formTimer);
+    location.hash='register';
+  }catch(e){toast('Could not save: '+e.message,true);$('#submitBtn').disabled=false}
+}
+
+/* =====================================================================
+   ENQUIRY DETAIL (open, comment, status, escalation time)
+   ===================================================================== */
+let detailTick=null;
+function closeModal(){$$('.overlay').forEach(o=>o.remove());clearInterval(detailTick);S.openId=null;if(location.hash.startsWith('#enq='))history.replaceState(null,'','#register');if(S.view==='register')fillRegister()}
+function openEnquiry(id){
+  const e=S.enquiries.find(x=>x.id===id);if(!e)return;
+  S.openId=id;$$('.overlay').forEach(o=>o.remove());
+  const evs=S.events.filter(x=>x.enquiry_id===id);
+  const timeEvs=evs.filter(x=>x.kind==='time');
+  const escalators=S.users.filter(u=>u.active&&u.is_escalation);
+  const running=S.escTimers[id];
+  const o=document.createElement('div');o.className='overlay';
+  o.innerHTML=`<div class="modal">
+   <div class="modal-h"><h2>${esc(e.enquiry_no)}</h2><span class="badge b-${e.status}">${e.status}</span><span class="muted">${fmtDate(e.enquiry_date)} · taken by ${esc(e.taken_by)}</span><button class="x" title="Close">×</button></div>
+   <div class="modal-b"><div class="two">
+    <div>
+      <div class="section"><h3>Enquirer</h3><dl class="kv">
+        <dt>Name</dt><dd>${esc(e.enquirer_name)}</dd><dt>Phone</dt><dd>${esc(e.phone)||'—'}</dd><dt>Email</dt><dd>${esc(e.email)||'—'}</dd>
+        <dt>Address</dt><dd>${esc(e.address)||'—'}</dd><dt>Date of birth</dt><dd>${fmtDate(e.dob)||'—'}</dd></dl></div>
+      <div class="section"><h3>Enquiry</h3><dl class="kv">
+        <dt>Aboriginal trust</dt><dd>${esc(e.trust)}</dd><dt>Type</dt><dd>${esc(e.enquiry_type)}</dd>
+        ${e.other_desc?`<dt>Other – gist</dt><dd>${esc(e.other_desc)}</dd>`:''}
+        <dt>Escalation</dt><dd>${e.escalation_required?'Yes — '+esc(e.escalated_to):'No'}</dd>
+        ${e.faq_used?`<dt>FAQs used</dt><dd>${esc(e.faq_used)}</dd>`:''}
+        <dt>Logged</dt><dd>${fmtDT(e.created_at)}</dd></dl>
+        <label style="margin-top:12px">Summary call notes</label><div class="notes">${esc(e.notes)}</div></div>
+      <div class="section"><h3>History &amp; comments</h3><ul class="timeline">${evs.slice().reverse().map(x=>`<li class="k-${x.kind}"><div class="meta">${fmtDT(x.created_at)} · <b>${esc(x.by_name)}</b> · ${({created:'Created',comment:'Comment',status:'Status change',escalated:'Escalated',time:'Time logged · '+hmm(x.seconds)})[x.kind]||x.kind}</div><div class="txt">${esc(x.text)}</div></li>`).join('')||'<li class="muted">No history yet</li>'}</ul></div>
+    </div>
+    <div>
+      <div class="section"><h3>Time for billing</h3>
+        <div class="timebox"><div><div class="l">Call time</div><div class="v mono">${hmm(e.call_seconds)}</div></div>
+          <div><div class="l">Escalation time</div><div class="v mono">${hmm(escSeconds(id))}</div></div>
+          <div><div class="l">Total</div><div class="v mono">${hmm(totalSeconds(e))}</div></div></div>
+        <label>Track escalation / follow-up time</label>
+        <div class="row" style="margin-bottom:8px">
+          <button class="btn ${running?'':'ghost'}" id="tBtn">${running?'■ Stop &amp; log':'▶ Start timer'}</button>
+          <span class="timer-pill ${running?'':'hidden'}" id="tPill"><span class="dot"></span><span id="tVal" class="mono">0:00</span></span>
+          <span class="small muted">${running?'Started by '+esc(running.by)+' at '+new Date(running.start).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'}):''}</span></div>
+        <div class="row"><input id="tMin" type="number" min="1" step="1" placeholder="Minutes" style="width:110px"><input id="tNote" placeholder="What was done (e.g. reviewed file, called member back)" style="flex:1;min-width:160px"><button class="btn ghost small" id="tAdd">Add time</button></div>
+        <div class="small muted" style="margin-top:6px">Use the timer while working the escalation, or add minutes manually. The note is saved with the time entry.</div>
+        ${timeEvs.length?`<table style="margin-top:10px"><thead><tr><th>Date</th><th>By</th><th>Time</th><th>Note</th></tr></thead><tbody>${timeEvs.map(t=>`<tr><td>${fmtDT(t.created_at)}</td><td>${esc(t.by_name)}</td><td class="mono">${hmm(t.seconds)}</td><td>${esc(t.text)}</td></tr>`).join('')}</tbody></table>`:''}
+      </div>
+      <div class="section"><h3>Add comment / update status</h3>
+        <div class="grid"><div class="c6"><label>Status</label><select id="uStatus">${STATUSES.map(s=>`<option ${e.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+        <div class="c6 ${e.status==='Escalated'?'':'hidden'}" id="uEscWrap"><label>Escalated to</label><select id="uEsc"><option value="">— Select person —</option>${escalators.map(u=>`<option ${e.escalated_to===u.name?'selected':''}>${esc(u.name)}</option>`).join('')}</select></div>
+        <div class="c12"><label>Comment</label><textarea id="uComment" rows="4" placeholder="Add a comment for the team…"></textarea></div></div>
+        <div class="row" style="margin-top:10px"><span class="err-msg" id="uErr"></span><span class="spacer"></span><button class="btn" id="uSave">Save update</button></div>
+      </div>
+    </div>
+   </div></div></div>`;
+  document.body.appendChild(o);
+  o.addEventListener('click',ev=>{if(ev.target===o)closeModal()});
+  $('.x',o).onclick=closeModal;
+  $('#uStatus').onchange=ev=>$('#uEscWrap').classList.toggle('hidden',ev.target.value!=='Escalated');
+  $('#uSave').onclick=()=>saveUpdate(e);
+  $('#tBtn').onclick=()=>toggleTimer(e);
+  $('#tAdd').onclick=()=>addManualTime(e);
+  clearInterval(detailTick);
+  const tick=()=>{const r=S.escTimers[id];if(r&&$('#tVal'))$('#tVal').textContent=hms((Date.now()-r.start)/1000)};tick();detailTick=setInterval(tick,1000);
+}
+async function saveUpdate(e){
+  const st=$('#uStatus').value, to=$('#uEsc').value, c=$('#uComment').value.trim();
+  const statusChanged=st!==e.status, escChanged=st==='Escalated'&&to!==e.escalated_to;
+  if(st==='Escalated'&&!to){$('#uErr').textContent='Choose who to escalate to';return}
+  if(!statusChanged&&!escChanged&&!c){$('#uErr').textContent='Nothing to save — add a comment or change the status';return}
+  $('#uSave').disabled=true;
+  try{
+    if(statusChanged||escChanged){
+      const patch={status:st};
+      if(st==='Escalated'){patch.escalated_to=to;patch.escalation_required=true}
+      if(st==='Closed')patch.closed_at=new Date().toISOString();
+      const upd=await DB.update('fas_enquiries',e.id,patch);Object.assign(e,upd||patch);
+      const txt=(statusChanged?'Status changed → '+st:'Re-assigned')+(st==='Escalated'?' (to '+to+')':'')+(c?'\n'+c:'');
+      await addEvent(e.id,st==='Escalated'?'escalated':'status',txt);
+      if(st==='Escalated'&&escChanged) await sendEscalationEmail(e,to,S.me.name);
+    } else await addEvent(e.id,'comment',c);
+    toast('Update saved');openEnquiry(e.id);
+  }catch(err){toast('Could not save: '+err.message,true);$('#uSave').disabled=false}
+}
+async function toggleTimer(e){
+  const r=S.escTimers[e.id];
+  if(!r){S.escTimers[e.id]={start:Date.now(),by:S.me.name};saveTimers();openEnquiry(e.id);return}
+  const secs=Math.round((Date.now()-r.start)/1000);
+  if(secs<1){delete S.escTimers[e.id];saveTimers();openEnquiry(e.id);return}
+  try{await addEvent(e.id,'time',$('#tNote').value.trim()||'Escalation work (timer)',secs);delete S.escTimers[e.id];saveTimers();toast('Logged '+hmm(secs));openEnquiry(e.id)}
+  catch(err){toast('Could not log time: '+err.message,true)}
+}
+async function addManualTime(e){
+  const m=parseFloat($('#tMin').value);
+  if(!(m>0)){toast('Enter the number of minutes',true);return}
+  try{await addEvent(e.id,'time',$('#tNote').value.trim()||'Escalation work (manual entry)',Math.round(m*60));toast('Logged '+m+' min');openEnquiry(e.id)}
+  catch(err){toast('Could not log time: '+err.message,true)}
+}
+
+/* =====================================================================
+   FAQS (page + drawer)
+   ===================================================================== */
+function faqList(cat,q,opts={}){
+  q=(q||'').toLowerCase();
+  const list=S.faqs.filter(f=>(!cat||f.category===cat)&&(!q||(f.question+' '+f.answer).toLowerCase().includes(q)));
+  if(!list.length)return '<p class="muted">No FAQs match. Try another category or search term.</p>';
+  return list.map(f=>`<details class="faq" data-id="${f.id}"><summary><span style="flex:1"><span class="cat">${esc(f.category)}</span><br>${esc(f.question)}</span>${f.approved?'':'<span class="badge b-draft">Draft</span>'}</summary>
+    <div class="ans">${esc(f.answer)}${f.link?`\n\n<a href="${esc(f.link)}" target="_blank" rel="noopener">More information ↗</a>`:''}
+    <div class="row" style="margin-top:10px">${opts.use?`<button class="btn small" data-use="${f.id}">Note on enquiry</button>`:''}${opts.edit&&canEditFaq()?`<button class="btn ghost small" data-edit="${f.id}">Edit</button>`:''}</div></div></details>`).join('');
+}
+function openFaqDrawer(cat){
+  $$('.drawer').forEach(d=>d.remove());
+  const d=document.createElement('div');d.className='drawer';let cur=cat||'';
+  d.innerHTML=`<div class="modal-h"><h2>FAQs</h2><a href="#faqs" target="_blank" class="small">Open full page ↗</a><button class="x">×</button></div>
+   <div class="body"><input id="dq" placeholder="Search FAQs…"><div class="chips" id="dchips"></div><div id="dlist"></div>
+   <p class="small muted">If the FAQ answers the query, click <b>Note on enquiry</b> to record it in the call notes. Anything needing personal advice should be escalated.</p></div>`;
+  document.body.appendChild(d);
+  const draw=()=>{$('#dchips',d).innerHTML=['',...TYPES].map(t=>`<span class="chip ${cur===t?'on':''}" data-c="${t}">${t||'All'}</span>`).join('');
+    $('#dlist',d).innerHTML=faqList(cur,$('#dq',d).value,{use:true});
+    $$('.chip',d).forEach(c=>c.onclick=()=>{cur=c.dataset.c;draw()});
+    $$('[data-use]',d).forEach(b=>b.onclick=()=>{const f=S.faqs.find(x=>x.id===+b.dataset.use);if(!S.form)return;
+      if(!S.form.faq_used.includes(f.question))S.form.faq_used.push(f.question);
+      S.form.notes=(S.form.notes?S.form.notes.trimEnd()+'\n':'')+'[Answered using FAQ: '+f.question+']';
+      const ta=$('textarea[name=notes]');if(ta)ta.value=S.form.notes;const fu=$('#faqUsed');if(fu)fu.textContent='FAQs referred to: '+S.form.faq_used.join('; ');toast('FAQ noted on enquiry')});};
+  $('#dq',d).oninput=draw;$('.x',d).onclick=()=>d.remove();draw();
+}
+function renderFaqs(){
+  const el=$('#v-faqs');let cur='';
+  el.innerHTML=`<div class="row" style="margin-bottom:12px"><h1 style="margin:0">Frequently Asked Questions</h1><span class="spacer"></span>${canEditFaq()?'<button class="btn" id="addFaq">+ Add FAQ</button>':''}</div>
+   <div class="card"><input id="fq" placeholder="Search FAQs…"><div class="chips" id="fchips"></div>
+   <p class="small muted" style="margin:0">General information only — not personal financial advice. FAQs marked <span class="badge b-draft">Draft</span> have not yet been approved by FAS.</p></div><div id="flist"></div>`;
+  const draw=()=>{$('#fchips').innerHTML=['',...TYPES].map(t=>`<span class="chip ${cur===t?'on':''}" data-c="${t}">${t||'All'}</span>`).join('');
+    $('#flist').innerHTML=faqList(cur,$('#fq').value,{edit:true});
+    $$('#fchips .chip').forEach(c=>c.onclick=()=>{cur=c.dataset.c;draw()});
+    $$('#flist [data-edit]').forEach(b=>b.onclick=()=>editFaq(S.faqs.find(x=>x.id===+b.dataset.edit)));};
+  $('#fq').oninput=draw;if($('#addFaq'))$('#addFaq').onclick=()=>editFaq(null);draw();
+}
+function editFaq(f){
+  const o=document.createElement('div');o.className='overlay';
+  o.innerHTML=`<div class="modal narrow"><div class="modal-h"><h2>${f?'Edit':'Add'} FAQ</h2><button class="x">×</button></div><div class="modal-b"><div class="grid">
+   <div class="c12"><label>Category</label><select id="qc">${TYPES.map(t=>`<option ${f&&f.category===t?'selected':''}>${t}</option>`).join('')}</select></div>
+   <div class="c12"><label>Question</label><input id="qq" value="${esc(f?f.question:'')}"></div>
+   <div class="c12"><label>Answer</label><textarea id="qa" rows="8">${esc(f?f.answer:'')}</textarea></div>
+   <div class="c12"><label>Link (optional)</label><input id="ql" value="${esc(f?f.link:'')}" placeholder="https://"></div>
+   <div class="c12"><label class="row" style="text-transform:none;font-size:14px;color:var(--ink);gap:6px"><input type="checkbox" id="qap" style="width:auto" ${f&&f.approved?'checked':''} ${isAdmin()?'':'disabled'}> Approved by FAS for use on calls ${isAdmin()?'':'(admin only)'}</label></div></div>
+   <div class="row" style="margin-top:14px">${f&&isAdmin()?'<button class="btn danger" id="qdel">Delete</button>':''}<span class="spacer"></span><button class="btn" id="qsave">Save</button></div></div></div>`;
+  document.body.appendChild(o);$('.x',o).onclick=()=>o.remove();
+  $('#qsave').onclick=async()=>{
+    const row={category:$('#qc').value,question:$('#qq').value.trim(),answer:$('#qa').value.trim(),link:$('#ql').value.trim(),updated_by:S.me.name,updated_at:new Date().toISOString()};
+    if(isAdmin())row.approved=$('#qap').checked; else if(!f) row.approved=false;
+    if(!row.question||!row.answer){toast('Question and answer are required',true);return}
+    try{if(f){Object.assign(f,await DB.update('fas_faqs',f.id,row))}else{S.faqs.push(await DB.insert('fas_faqs',row))}o.remove();renderFaqs();toast('FAQ saved')}catch(e){toast(e.message,true)}};
+  if($('#qdel'))$('#qdel').onclick=async()=>{if(!confirm('Delete this FAQ?'))return;try{await DB.remove('fas_faqs',f.id);S.faqs=S.faqs.filter(x=>x.id!==f.id);o.remove();renderFaqs()}catch(e){toast(e.message,true)}};
+}
+
+/* =====================================================================
+   BILLING REPORT
+   ===================================================================== */
+const R={from:'',to:'',trust:'',type:'',status:'',round:'0.1'};
+function billHours(sec){const h=sec/3600,u=parseFloat(R.round);return u?Math.ceil(h/u-1e-9)*u:h}
+function reportRows(){
+  return S.enquiries.filter(e=>(!R.from||e.enquiry_date>=R.from)&&(!R.to||e.enquiry_date<=R.to)&&(!R.trust||e.trust===R.trust)&&(!R.type||e.enquiry_type===R.type)&&(!R.status||e.status===R.status))
+    .slice().sort((a,b)=>(a.enquiry_date+a.enquiry_no).localeCompare(b.enquiry_date+b.enquiry_no))
+    .map(e=>{const call=+e.call_seconds||0,escS=escSeconds(e.id),tot=call+escS;return {e,call,escS,tot,bill:billHours(tot)}});
+}
+function renderReport(){
+  if(!R.from){const d=new Date();R.from=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-01';R.to=todayISO()}
+  const el=$('#v-report');
+  el.innerHTML=`<div class="print-head">${logoHTML()}<h2>Enquiry Billing Report</h2><div id="phSub" class="muted"></div></div>
+  <div class="row no-print" style="margin-bottom:12px"><h1 style="margin:0">Billing Report</h1><span class="spacer"></span><button class="btn ghost" id="csv">Export CSV</button><button class="btn" id="prt">Print / PDF</button></div>
+  <div class="card no-print"><div class="grid">
+    <div class="c3"><label>From</label><input type="date" id="r-from" value="${R.from}"></div>
+    <div class="c3"><label>To</label><input type="date" id="r-to" value="${R.to}"></div>
+    <div class="c3"><label>Aboriginal trust</label><select id="r-trust"><option value="">All trusts</option>${S.trusts.map(t=>`<option ${R.trust===t.name?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
+    <div class="c3"><label>Type of enquiry</label><select id="r-type"><option value="">All types</option>${TYPES.map(t=>`<option ${R.type===t?'selected':''}>${t}</option>`).join('')}</select></div>
+    <div class="c3"><label>Status</label><select id="r-status"><option value="">All statuses</option>${STATUSES.map(s=>`<option ${R.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+    <div class="c3"><label>Billing rounding (per enquiry)</label><select id="r-round">
+      <option value="0" ${R.round==='0'?'selected':''}>Exact time</option><option value="0.1" ${R.round==='0.1'?'selected':''}>Round up to 6 min (0.1 hr)</option><option value="0.25" ${R.round==='0.25'?'selected':''}>Round up to 15 min (0.25 hr)</option></select></div>
+  </div></div>
+  <div id="repOut"></div>`;
+  [['r-from','from'],['r-to','to'],['r-trust','trust'],['r-type','type'],['r-status','status'],['r-round','round']].forEach(([id,k])=>$('#'+id).onchange=ev=>{R[k]=ev.target.value;fillReport()});
+  $('#csv').onclick=exportCSV;
+  $('#prt').onclick=()=>{el.classList.add('printing');window.print();setTimeout(()=>el.classList.remove('printing'),500)};
+  fillReport();
+}
+function fillReport(){
+  const rows=reportRows();
+  const sum=k=>rows.reduce((s,r)=>s+r[k],0);
+  const byTrust={};rows.forEach(r=>{const t=byTrust[r.e.trust]||(byTrust[r.e.trust]={n:0,tot:0,bill:0});t.n++;t.tot+=r.tot;t.bill+=r.bill});
+  $('#phSub').textContent=`${fmtDate(R.from)} to ${fmtDate(R.to)}${R.trust?' · '+R.trust:''}${R.type?' · '+R.type:''}${R.status?' · '+R.status:''} · generated ${new Date().toLocaleString('en-AU')}`;
+  $('#repOut').innerHTML=`
+  <div class="card"><h3>Summary by trust</h3><div class="tablewrap"><table><thead><tr><th>Aboriginal trust</th><th>Enquiries</th><th>Total time</th><th>Hours to bill</th></tr></thead><tbody>
+   ${Object.entries(byTrust).sort().map(([t,v])=>`<tr><td>${esc(t)}</td><td>${v.n}</td><td class="mono">${hmm(v.tot)}</td><td class="mono">${v.bill.toFixed(2)}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">No enquiries in this period</td></tr>'}
+   ${rows.length?`<tr class="tot"><td>Total</td><td>${rows.length}</td><td class="mono">${hmm(sum('tot'))}</td><td class="mono">${sum('bill').toFixed(2)}</td></tr>`:''}</tbody></table></div></div>
+  <div class="card"><h3>Enquiry detail</h3><div class="tablewrap"><table><thead><tr><th>Date of enquiry</th><th>Enquiry no.</th><th>Aboriginal trust</th><th>Name of enquirer</th><th>Type of enquiry</th><th>User taking enquiry</th><th>Call</th><th>Escalation</th><th>Time to be billed</th><th>Hours</th></tr></thead><tbody>
+   ${rows.map(r=>`<tr class="click" data-id="${r.e.id}"><td>${fmtDate(r.e.enquiry_date)}</td><td>${esc(r.e.enquiry_no)}</td><td>${esc(r.e.trust)}</td><td>${esc(r.e.enquirer_name)}</td><td>${esc(r.e.enquiry_type)}</td><td>${esc(r.e.taken_by)}</td><td class="mono">${hmm(r.call)}</td><td class="mono">${hmm(r.escS)}</td><td class="mono">${hmm(r.tot)}</td><td class="mono">${r.bill.toFixed(2)}</td></tr>`).join('')||'<tr><td colspan="10" class="muted">No enquiries in this period</td></tr>'}
+   ${rows.length?`<tr class="tot"><td colspan="6">Total (${rows.length} enquiries)</td><td class="mono">${hmm(sum('call'))}</td><td class="mono">${hmm(sum('escS'))}</td><td class="mono">${hmm(sum('tot'))}</td><td class="mono">${sum('bill').toFixed(2)}</td></tr>`:''}
+  </tbody></table></div><p class="small muted">Time to be billed = call time (form opened → submitted) + escalation time logged. Hours column applies the rounding selected above to each enquiry.</p></div>`;
+  $$('#repOut tr.click').forEach(tr=>tr.onclick=()=>openEnquiry(+tr.dataset.id));
+}
+function exportCSV(){
+  const rows=reportRows();
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const lines=[['Date of Enquiry','Enquiry Number','Aboriginal Trust','Name of Enquirer','Type of Enquiry','User Taking Enquiry','Status','Escalated To','Call Minutes','Escalation Minutes','Total Minutes','Hours to Bill'].map(q).join(',')];
+  rows.forEach(r=>lines.push([fmtDate(r.e.enquiry_date),r.e.enquiry_no,r.e.trust,r.e.enquirer_name,r.e.enquiry_type,r.e.taken_by,r.e.status,r.e.escalated_to,(r.call/60).toFixed(1),(r.escS/60).toFixed(1),(r.tot/60).toFixed(1),r.bill.toFixed(2)].map(q).join(',')));
+  const blob=new Blob(['﻿'+lines.join('\r\n')],{type:'text/csv'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`FAS_billing_${R.from}_to_${R.to}.csv`;document.body.appendChild(a);a.click();a.remove();
+}
+
+/* =====================================================================
+   SETTINGS (admin)
+   ===================================================================== */
+function renderSettings(){
+  const el=$('#v-settings');
+  el.innerHTML=`<h1>Settings</h1>
+  <div class="card"><h3>Users</h3>
+   <p class="small muted">Front desk staff take calls. Tick <b>Escalation contact</b> for advisers who can be escalated to (they receive the email). ${DEMO?'':'Each person also needs a login: Supabase → Authentication → Users → Invite user, using the same email.'}</p>
+   <div class="tablewrap"><table><thead><tr><th>Name</th><th>Email</th><th>Escalation contact</th><th>Admin</th><th>Active</th><th></th></tr></thead><tbody>
+   ${S.users.map(u=>`<tr data-id="${u.id}"><td><input class="u-name" value="${esc(u.name)}"></td><td><input class="u-email" value="${esc(u.email)}"></td>
+     <td><input type="checkbox" class="u-esc" style="width:auto" ${u.is_escalation?'checked':''}></td><td><input type="checkbox" class="u-adm" style="width:auto" ${u.is_admin?'checked':''}></td>
+     <td><input type="checkbox" class="u-act" style="width:auto" ${u.active?'checked':''}></td><td><button class="btn ghost small u-save">Save</button></td></tr>`).join('')}
+   <tr><td><input id="nu-name" placeholder="New user name"></td><td><input id="nu-email" placeholder="name@fasprivatewealth.com.au"></td><td><input type="checkbox" id="nu-esc" style="width:auto"></td><td><input type="checkbox" id="nu-adm" style="width:auto"></td><td></td><td><button class="btn small" id="nu-add">Add</button></td></tr>
+   </tbody></table></div></div>
+  <div class="card"><h3>Aboriginal trusts</h3><p class="small muted">Trusts shown in the enquiry form drop-down. Untick Active to hide a trust from new enquiries while keeping history.</p>
+   <div class="tablewrap"><table><thead><tr><th>Trust name</th><th>Active</th><th></th></tr></thead><tbody>
+   ${S.trusts.map(t=>`<tr data-id="${t.id}"><td><input class="t-name" value="${esc(t.name)}"></td><td><input type="checkbox" class="t-act" style="width:auto" ${t.active?'checked':''}></td><td><button class="btn ghost small t-save">Save</button></td></tr>`).join('')}
+   <tr><td><input id="nt-name" placeholder="New trust name"></td><td></td><td><button class="btn small" id="nt-add">Add</button></td></tr></tbody></table></div></div>
+  ${DEMO?'<div class="card"><h3>Demo data</h3><p class="small muted">Reset the demo back to the sample data.</p><button class="btn danger" id="resetDemo">Reset demo data</button></div>':''}`;
+  $$('.u-save',el).forEach(b=>b.onclick=async()=>{const tr=b.closest('tr'),id=+tr.dataset.id;
+    const p={name:$('.u-name',tr).value.trim(),email:$('.u-email',tr).value.trim().toLowerCase(),is_escalation:$('.u-esc',tr).checked,is_admin:$('.u-adm',tr).checked,active:$('.u-act',tr).checked};
+    if(!p.name){toast('Name required',true);return}
+    if(id===S.me.id&&!p.is_admin){toast('You cannot remove your own admin access',true);return}
+    try{Object.assign(S.users.find(u=>u.id===id),await DB.update('fas_users',id,p));toast('User saved')}catch(e){toast(e.message,true)}});
+  $('#nu-add').onclick=async()=>{const p={name:$('#nu-name').value.trim(),email:$('#nu-email').value.trim().toLowerCase(),is_escalation:$('#nu-esc').checked,is_admin:$('#nu-adm').checked,active:true};
+    if(!p.name||!p.email){toast('Name and email required',true);return}
+    try{S.users.push(await DB.insert('fas_users',p));S.users.sort((a,b)=>a.name.localeCompare(b.name));renderSettings();toast('User added')}catch(e){toast(e.message,true)}};
+  $$('.t-save',el).forEach(b=>b.onclick=async()=>{const tr=b.closest('tr'),id=+tr.dataset.id,p={name:$('.t-name',tr).value.trim(),active:$('.t-act',tr).checked};
+    if(!p.name){toast('Name required',true);return}
+    try{Object.assign(S.trusts.find(t=>t.id===id),await DB.update('fas_trusts',id,p));toast('Trust saved')}catch(e){toast(e.message,true)}});
+  $('#nt-add').onclick=async()=>{const n=$('#nt-name').value.trim();if(!n)return;
+    try{S.trusts.push(await DB.insert('fas_trusts',{name:n,active:true}));S.trusts.sort((a,b)=>a.name.localeCompare(b.name));renderSettings();toast('Trust added')}catch(e){toast(e.message,true)}};
+  if($('#resetDemo'))$('#resetDemo').onclick=async()=>{if(!confirm('Reset all demo data?'))return;store.del(Demo.key);delete mem[Demo.key];Demo.load();await loadAll();renderSettings();toast('Demo data reset')};
+}
+
+function changePassword(){
+  const o=document.createElement('div');o.className='overlay';
+  o.innerHTML=`<div class="modal narrow"><div class="modal-h"><h2>Change password</h2><button class="x">×</button></div><div class="modal-b">
+   <label>New password</label><input id="cp1" type="password" autocomplete="new-password">
+   <label style="margin-top:10px">Confirm new password</label><input id="cp2" type="password" autocomplete="new-password">
+   <div class="err-msg" id="cpErr"></div><div class="row" style="margin-top:14px"><span class="spacer"></span><button class="btn" id="cpSave">Save password</button></div></div></div>`;
+  document.body.appendChild(o);$('.x',o).onclick=()=>o.remove();
+  $('#cpSave').onclick=async()=>{const a=$('#cp1').value,b=$('#cp2').value;
+    if(a.length<8){$('#cpErr').textContent='Use at least 8 characters';return}
+    if(a!==b){$('#cpErr').textContent='Passwords do not match';return}
+    try{await Auth.setPassword(await Auth.token(),a);o.remove();toast('Password changed')}catch(e){$('#cpErr').textContent=e.message}};
+}
+
+/* =====================================================================
+   LOGIN / START
+   ===================================================================== */
+async function safe(fn){try{return await fn()}catch(e){toast(e.message,true)}}
+function renderLogin(msg){
+  if(DEMO){
+    $('#app').innerHTML=`<div class="login">${logoHTML()}<h2 style="text-align:center">Trust Member Enquiry Register</h2>
+      <p class="muted small" style="text-align:center">Demo mode — choose a user to sign in as.</p>
+      <label>User</label><select id="lu">${S.users.filter(u=>u.active).map(u=>`<option value="${u.id}">${esc(u.name)}${u.is_admin?' (admin)':u.is_escalation?' (adviser)':''}</option>`).join('')}</select>
+      <button class="btn" id="lgo" style="width:100%;justify-content:center;margin-top:14px">Sign in</button></div>`;
+    $('#lgo').onclick=()=>{store.set('fas_demo_user',+$('#lu').value,true);start()};
+    return;
+  }
+  const recovery=new URLSearchParams(location.hash.slice(1));
+  if(recovery.get('access_token')&&['recovery','invite','signup'].includes(recovery.get('type'))){
+    $('#app').innerHTML=`<div class="login">${logoHTML()}<h2 style="text-align:center">Set your password</h2>
+      <label>New password</label><input id="np" type="password"><button class="btn" id="npb" style="width:100%;justify-content:center;margin-top:14px">Save password</button><div class="err-msg" id="lerr"></div></div>`;
+    $('#npb').onclick=async()=>{try{await Auth.setPassword(recovery.get('access_token'),$('#np').value);history.replaceState(null,'',location.pathname);renderLogin('Password saved — please sign in.')}catch(e){$('#lerr').textContent=e.message}};
+    return;
+  }
+  $('#app').innerHTML=`<div class="login">${logoHTML()}<h2 style="text-align:center">Trust Member Enquiry Register</h2>
+    <label>Email</label><input id="le" type="email" autocomplete="username"><label style="margin-top:10px">Password</label><input id="lp" type="password" autocomplete="current-password">
+    <button class="btn" id="lgo" style="width:100%;justify-content:center;margin-top:14px">Sign in</button>
+    <div class="row" style="margin-top:10px"><a href="#" id="forgot" class="small">Forgot password?</a></div><div class="err-msg" id="lerr">${esc(msg||'')}</div></div>`;
+  const go=async()=>{$('#lerr').textContent='';try{await Auth.login($('#le').value.trim(),$('#lp').value);await start()}catch(e){$('#lerr').textContent=e.message}};
+  $('#lgo').onclick=go;$('#lp').onkeydown=e=>{if(e.key==='Enter')go()};
+  $('#forgot').onclick=async e=>{e.preventDefault();const em=$('#le').value.trim();if(!em){$('#lerr').textContent='Enter your email first';return}await Auth.recover(em);$('#lerr').textContent='If that email is registered, a reset link has been sent.'};
+}
+async function start(){
+  try{
+    if(DEMO){Demo.load();$('#demoBanner').classList.remove('hidden');}
+    else{Auth.load();if(!Auth.session){renderLogin();return}}
+    await loadAll();
+    if(DEMO){const uid=store.get('fas_demo_user',true);S.me=S.users.find(u=>u.id===uid&&u.active);if(!S.me){renderLogin();return}}
+    else{S.me=S.users.find(u=>(u.email||'').toLowerCase()===Auth.session.email.toLowerCase()&&u.active);
+      if(!S.me){Auth.clear();renderLogin('Your login is not set up in the FAS user list. Ask an administrator to add '+Auth.session.email+'.');return}}
+    loadTimers();renderShell();route();
+  }catch(e){renderLogin(e.message)}
+}
+start();
+</script>
+</body>
+</html>
